@@ -12,13 +12,16 @@ def cardinality_hyper_log_log(buckets):
     buckets = [1 if bucket == 0 else 1 / (bucket << 1) for bucket in buckets]
     return 0.72134 * len(buckets) ** 2 / np.sum(buckets)
 
+
 def hash_sha(s):
     return int(hashlib.sha1(str(s).encode('utf-8')).hexdigest(), 16) & 0xffffff
+
 
 def least1(x, L):
     if x == 0:
         return 2 ** L
     return x & -x
+
 
 class HyperLogLogEstimator:
     def __init__(self, data_set):

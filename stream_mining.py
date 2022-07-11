@@ -22,12 +22,12 @@ st.header('Diabetic data')
 st.write(data_frame)
 
 # 1. Task: Check if an id is in the data set with a Bloom Filter
+st.header('Bloom Filter')
+
 # extract unique IDs from column 'encounter_id'
 encounter_ids = data['encounter_id'].unique()
 st.write('Number of encounter_ids:', len(encounter_ids))
 
-# create Bloom Filter
-st.header('Bloom Filter')
 # create slider to choose the filter length of the Bloom Filter
 filter_length_slider = st.slider('Choose the filter length', 1, len(encounter_ids), 1)
 # insert integer number to check
