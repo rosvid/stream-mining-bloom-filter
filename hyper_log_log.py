@@ -29,15 +29,10 @@ class HyperLogLogEstimator:
         self.estimate = self.calculate_estimate()
 
     def calculate_estimate(self):
-        s = set([])
-        bitmap = 0
         buckets = np.array([0] * 64)
 
-        for idx, w in enumerate(self.data_set):
-            s.add(w)
+        for w in self.data_set:
             hashed = hash_sha(w)
-
-            bitmap |= least1(hashed, 24)
             buckets[hashed % 64] = max(buckets[hashed % 64], least1(hashed >> 6, 24))
 
         return int(cardinality_hyper_log_log(buckets))
